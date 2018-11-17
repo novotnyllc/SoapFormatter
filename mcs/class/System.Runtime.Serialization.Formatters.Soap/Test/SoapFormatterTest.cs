@@ -243,10 +243,12 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 			SimpleObject obj = new SimpleObject("simple object", 1);
 			objReturn = Serialize(obj);
 			Assert.AreEqual(obj, objReturn, "#SimpleObject");
-			objReturn = Serialize(typeof(SimpleObject));
-			Assert.AreEqual(typeof(SimpleObject), (Type)objReturn, "#Type");
-			objReturn = Serialize(obj.GetType().Assembly);
-			Assert.AreEqual(obj.GetType().Assembly, objReturn, "#Assembly");
+			
+            // .NET Core does not mark RuntimeType as serializable
+		    //objReturn = Serialize(typeof(SimpleObject));
+			//Assert.AreEqual(typeof(SimpleObject), (Type)objReturn, "#Type");
+			//objReturn = Serialize(obj.GetType().Assembly);
+			//Assert.AreEqual(obj.GetType().Assembly, objReturn, "#Assembly");
 		}
 		
 		public static bool CheckArray(object objTest, object objReturn) {
