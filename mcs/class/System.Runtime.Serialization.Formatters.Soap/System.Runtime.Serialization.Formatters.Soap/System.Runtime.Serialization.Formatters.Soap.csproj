@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>1699</NoWarn>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../msfinal.pub</AssemblyOriginatorKeyFile>
+    <DefineConstants>NET_4_0;NET_4_5;NET_4_6;MONO;WIN_PLATFORM</DefineConstants>
+    <LangVersion>latest</LangVersion>
+    <PublicSign>true</PublicSign>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!--<Compile Include="..\..\..\build\common\Consts.cs" />-->
+    <Compile Include="..\..\..\build\common\Locale.cs" />
+    <Compile Include="..\..\..\build\common\MonoTODOAttribute.cs" />
+  </ItemGroup>
+
+</Project>
