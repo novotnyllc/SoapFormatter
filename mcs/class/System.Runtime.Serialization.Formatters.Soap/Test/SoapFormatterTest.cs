@@ -20,11 +20,11 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 		
 	}
 	
-	public delegate void TrucDlg(string s);
+	//public delegate void TrucDlg(string s);
 	
 	[Serializable]
 	public class MoreComplexObject {
-		public event TrucDlg TrucEvent;
+		//public event TrucDlg TrucEvent;
 		private string _string;
 		private string[] _strings = new string[]{};
 		private Queue _queue = new Queue();
@@ -35,7 +35,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 		}
 
 		public MoreComplexObject() {
-			TrucEvent += new TrucDlg(WriteString);
+			//TrucEvent += new TrucDlg(WriteString);
 			_queue.Enqueue(1);
 			_queue.Enqueue(null);
 			_queue.Enqueue("foo");
@@ -46,7 +46,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 		}
 
 		public void OnTrucEvent(string s) {
-			TrucEvent(s);
+			//TrucEvent(s);
 		}
 
 		public void WriteString(string s) {
@@ -158,7 +158,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 	{
 		private SoapFormatter _soapFormatter;
 		private SoapFormatter _soapFormatterDeserializer;
-		private RemotingSurrogateSelector _surrogate;
+		//private RemotingSurrogateSelector _surrogate;
 
 #if DEBUG
 		private void Out(MemoryStream stream, object objGraph) {
@@ -173,7 +173,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 			MemoryStream stream = new MemoryStream();
 			Assert.IsTrue(objGraph != null);
 			Assert.IsTrue(stream != null);
-			_soapFormatter.SurrogateSelector = _surrogate;
+		//	_soapFormatter.SurrogateSelector = _surrogate;
 			_soapFormatter.Serialize(stream, objGraph);
 			
 #if DEBUG
@@ -194,8 +194,8 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 		[SetUp]
 		public void GetReady() {
 			StreamingContext context = new StreamingContext(StreamingContextStates.All);
-			_surrogate = new RemotingSurrogateSelector();
-			_soapFormatter = new SoapFormatter(_surrogate, context);
+		//	_surrogate = new RemotingSurrogateSelector();
+			_soapFormatter = new SoapFormatter(null, context);
 			_soapFormatterDeserializer = new SoapFormatter(null, context);
 		}
 		
@@ -293,21 +293,21 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 		}
 		
 		[Test]
+        [Ignore("Not on .NET Core")]
 		public void TestMarshalByRefObject() {
 			Serialize(new MarshalObject("thing", 1234567890));
 		}
 		
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void TestNullObject() {
 			MemoryStream stream = new MemoryStream();
-			_soapFormatter.Serialize(stream, null);
+
+            Assert.Throws<ArgumentNullException>(() => _soapFormatter.Serialize(stream, null));
 		}
 		
 		[Test]
-		[ExpectedException(typeof(SerializationException))]
 		public void TestNonSerialisable() {
-			Serialize(new NonSerializableObject());
+            Assert.Throws<SerializationException>(() => Serialize(new NonSerializableObject()));
 		}
 
 		[Test]
@@ -316,8 +316,8 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 			MoreComplexObject objTest = new MoreComplexObject();
 			objReturn = (MoreComplexObject) Serialize(objTest);
 			Assert.AreEqual(objTest, objReturn, "#Equals");
-			objReturn.OnTrucEvent("bidule");
-			Assert.AreEqual("bidule", objReturn.ObjString, "#dlg");
+			//objReturn.OnTrucEvent("bidule");
+			//Assert.AreEqual("bidule", objReturn.ObjString, "#dlg");
 		}
 
 		[Test]
@@ -326,7 +326,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 			MemoryStream stream = new MemoryStream();
 			Version1 objVer1 = new Version1(123);
 
-			_soapFormatter.SurrogateSelector = _surrogate;
+			//_soapFormatter.SurrogateSelector = _surrogate;
 			_soapFormatter.Serialize(stream, objVer1);
 
 			stream.Position = 0;
