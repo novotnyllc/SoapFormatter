@@ -1,0 +1,64 @@
+trigger:
+  - master
+  - rel/*
+
+pr:
+  - master
+  - rel/*
+
+pool:
+  vmImage: vs2017-win2016
+
+variables: 
+  BuildConfiguration: Release
+
+steps:
+- task: DotNetCoreCLI@2  
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . nbgv
+  displayName: Install NBGV tool
+
+- script: nbgv cloud
+  displayName: Set Version
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/*.sln'
+    arguments: -c $(BuildConfiguration)
+  displayName: Build
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: pack
+    packagesToPack: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/System.Runtime.Serialization.Formatters.Soap/*.csproj'
+    configuration: $(BuildConfiguration)
+    packDirectory: $(Build.ArtifactStagingDirectory)\Artifacts    
+    verbosityPack: Minimal
+  displayName: Pack
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/Test/*.csproj'
+    arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/mcs/class/System.Runtime.Serialization.Formatters.Soap/CodeCoverage.runsettings /p:DebugType=portable
+  displayName: Run Tests
+    
+- task: PowerShell@2
+  displayName: Authenticode Sign artifacts
+  inputs:
+    filePath: Scripts/Sign-Package.ps1
+  env:
+    SignClientUser: $(SignClientUser)
+    SignClientSecret: $(SignClientSecret)
+    ArtifactDirectory: $(Build.ArtifactStagingDirectory)\Artifacts
+  condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Build Artifacts
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\Artifacts
+    artifactType: container
+    artifactName: Artifacts
