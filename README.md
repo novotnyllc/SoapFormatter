@@ -8,6 +8,12 @@ XML for applications that have a dependency on that legacy format.
 [![Build Status](https://dev.azure.com/onovotny/GitBuilds/_apis/build/status/SoapFormatter%20-%20CI?branchName=master)](https://dev.azure.com/onovotny/GitBuilds/_build/latest?definitionId=45)
 [![NuGet](https://img.shields.io/nuget/v/SoapFormatter.svg)](https://www.nuget.org/packages/SoapFormatter)
 
+
+The library is a code-compatible replacement, but has a different assembly identity. That means you must recompile
+code against this library. Two types were moved into a different namespace to avoid potential conflicts:
+
+`Header` and `HeaderHandler`. Those are now in the `System.Runtime.Remoting.Messaging.Legacy` namespace.
+
 ## Compiling
 See the `sln` file in `mcs/class/System.Runtime.Serialization.Formatters.Soap`.
 
