@@ -40,7 +40,7 @@ using System.Runtime.Remoting.Messaging;
 namespace System.Runtime.Remoting
 {
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public class InternalRemotingServices 
+	internal class InternalRemotingServices 
 	{
 		static Hashtable _soapAttributes = new Hashtable ();
 		

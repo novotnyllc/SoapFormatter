@@ -18,7 +18,7 @@ namespace System.Runtime.Remoting.Messaging {
     using System.IO;
     using System.Runtime.Serialization;
 [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IRemotingFormatter : IFormatter {
+internal interface IRemotingFormatter : IFormatter {
     
         // Begin the process of deserialization.  For purposes of serialization,
         // this will probably rely on a stream that has been connected to the 

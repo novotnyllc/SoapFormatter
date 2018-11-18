@@ -33,7 +33,7 @@ namespace System.Runtime.Remoting.Metadata {
 
 	[System.Runtime.InteropServices.ComVisible (true)]
 	[System.Serializable]
-	public enum XmlFieldOrderOption
+	internal enum XmlFieldOrderOption
 	{
 		All = 0,
 		Sequence = 1,

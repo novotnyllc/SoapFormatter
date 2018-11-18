@@ -35,7 +35,7 @@ namespace System.Runtime.Remoting.Metadata {
 
 	[AttributeUsage (AttributeTargets.Parameter)]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapParameterAttribute : SoapAttribute
+	internal sealed class SoapParameterAttribute : SoapAttribute
 	{
 		public SoapParameterAttribute ()
 		{

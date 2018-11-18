@@ -38,7 +38,7 @@ namespace System.Runtime.Remoting.Metadata {
 
 	[AttributeUsage (AttributeTargets.Field)]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapFieldAttribute : SoapAttribute
+	internal sealed class SoapFieldAttribute : SoapAttribute
 	{
 		int _order;
 		string _elementName;

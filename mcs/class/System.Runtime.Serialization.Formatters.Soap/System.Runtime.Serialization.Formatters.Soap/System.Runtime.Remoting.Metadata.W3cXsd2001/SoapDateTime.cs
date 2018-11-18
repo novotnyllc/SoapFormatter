@@ -37,7 +37,7 @@ using System.Globalization;
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapDateTime
+	internal sealed class SoapDateTime
 	{
 		static readonly string[] _datetimeFormats = new string[] {
 		  "yyyy-MM-ddTHH:mm:ss",

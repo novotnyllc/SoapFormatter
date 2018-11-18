@@ -33,7 +33,7 @@
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
 	[System.Runtime.InteropServices.ComVisible (true)]
-        public interface ISoapXsd {
+	internal interface ISoapXsd {
 		string GetXsdType();
 	}
 }

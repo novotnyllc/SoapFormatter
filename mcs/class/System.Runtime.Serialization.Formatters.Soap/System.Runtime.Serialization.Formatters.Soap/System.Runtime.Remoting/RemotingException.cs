@@ -36,7 +36,7 @@ namespace System.Runtime.Remoting {
 
 	[Serializable]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public class RemotingException : SystemException
+	internal class RemotingException : SystemException
 	{
 		public RemotingException ()
 			: base ()

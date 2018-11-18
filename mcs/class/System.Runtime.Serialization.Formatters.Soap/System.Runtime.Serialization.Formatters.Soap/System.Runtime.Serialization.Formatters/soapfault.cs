@@ -29,7 +29,7 @@ namespace System.Runtime.Serialization.Formatters
 [Serializable]
 [SoapType(Embedded=true)]    
 [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class SoapFault : ISerializable
+internal sealed class SoapFault : ISerializable
     {
         String faultCode;
         String faultString;

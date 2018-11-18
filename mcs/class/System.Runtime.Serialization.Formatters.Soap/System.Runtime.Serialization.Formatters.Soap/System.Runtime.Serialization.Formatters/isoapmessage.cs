@@ -23,7 +23,7 @@ namespace System.Runtime.Serialization.Formatters {
     // The call record can be transmitted as the SOAP Top record which contains
     // a method name instead of an object name as the Top record's element name
 [System.Runtime.InteropServices.ComVisible(true)]
-    public interface ISoapMessage
+public interface ISoapMessage
     {
         // Name of parameters, if null the default param names will be used
 

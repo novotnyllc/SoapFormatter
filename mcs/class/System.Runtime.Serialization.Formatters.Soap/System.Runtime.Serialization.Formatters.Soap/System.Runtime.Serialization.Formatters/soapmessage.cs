@@ -23,7 +23,7 @@ namespace System.Runtime.Serialization.Formatters {
     // a method name as the element name instead of the object name.
    [Serializable]
 [System.Runtime.InteropServices.ComVisible(true)]
-    public class SoapMessage : ISoapMessage
+   internal class SoapMessage : ISoapMessage
     {
         internal String[] paramNames;
         internal Object[] paramValues;

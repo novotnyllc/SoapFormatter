@@ -39,7 +39,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
 	[Serializable]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapHexBinary : ISoapXsd
+	internal sealed class SoapHexBinary : ISoapXsd
 	{
 		byte[] _value;
 		StringBuilder sb = new StringBuilder ();

@@ -37,7 +37,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
 	[Serializable]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapNotation : ISoapXsd
+	internal sealed class SoapNotation : ISoapXsd
 	{
 		string _value;
 		

@@ -38,7 +38,7 @@ using System.Globalization;
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
 {
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapDuration
+	internal sealed class SoapDuration
 	{
 		public SoapDuration()
 		{

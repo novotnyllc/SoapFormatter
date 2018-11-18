@@ -38,7 +38,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
 	[Serializable]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapNegativeInteger : ISoapXsd
+	internal sealed class SoapNegativeInteger : ISoapXsd
 	{
 		decimal _value;
 		

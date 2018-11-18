@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 namespace System.Runtime.Remoting {
 
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public class SoapServices
+	internal class SoapServices
 	{
 		static Hashtable _xmlTypes = new Hashtable ();
 		static Hashtable _xmlElements = new Hashtable ();

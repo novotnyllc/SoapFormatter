@@ -39,7 +39,7 @@ namespace System.Runtime.Remoting.Metadata {
 
 	[AttributeUsage (AttributeTargets.Method)]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapMethodAttribute : SoapAttribute
+	internal sealed class SoapMethodAttribute : SoapAttribute
 	{
 		string _responseElement;
 		string _responseNamespace;

@@ -38,7 +38,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
 	[Serializable]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapDate : ISoapXsd
+	internal sealed class SoapDate : ISoapXsd
 	{
 		static readonly string[] _datetimeFormats = new string[]
 		{

@@ -42,7 +42,7 @@ namespace System.Runtime.Remoting.Metadata {
 	[System.Runtime.InteropServices.ComVisible (true)]
 	[System.Serializable]
 
-	public enum SoapOption {
+	internal enum SoapOption {
 
 		/// <summary>
 		/// </summary>

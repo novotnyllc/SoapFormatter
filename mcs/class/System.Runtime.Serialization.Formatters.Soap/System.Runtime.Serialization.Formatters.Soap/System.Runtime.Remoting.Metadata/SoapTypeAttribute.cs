@@ -39,7 +39,7 @@ namespace System.Runtime.Remoting.Metadata {
 	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Struct |
 			 AttributeTargets.Enum | AttributeTargets.Interface)]
 	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapTypeAttribute : SoapAttribute
+	internal sealed class SoapTypeAttribute : SoapAttribute
 	{
 		SoapOption _soapOption;
 		bool _useAttribute;
