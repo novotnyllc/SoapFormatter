@@ -13,7 +13,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <!--<Compile Include="..\..\..\build\common\Consts.cs" />-->
     <Compile Include="..\..\..\build\common\MonoTODOAttribute.cs" />
   </ItemGroup>
 

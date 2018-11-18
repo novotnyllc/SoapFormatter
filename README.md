@@ -14,3 +14,7 @@ See the `sln` file in `mcs/class/System.Runtime.Serialization.Formatters.Soap`.
 ## Limitations
 .NET Core does not support serializing all of the same types that .NET Framework does.
 Noteably, Delegates, `Type`, and `Assembly` are not supported.
+
+## Disclaimer
+Use at your own risk. The formatter may have security implications in your code that you are solely
+responsible for.

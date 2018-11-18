@@ -413,7 +413,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap {
 	}
 	
 	[Serializable]
-	public class SignatureTest
+	internal class SignatureTest
 	{
 		public SoapQName qn = new SoapQName ("e", "name", "espai");
 	}	
