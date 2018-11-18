@@ -12,5 +12,5 @@ XML for applications that have a dependency on that legacy format.
 See the `sln` file in `mcs/class/System.Runtime.Serialization.Formatters.Soap`.
 
 ## Limitations
-.NET Core does not support serialzing all of the same types that .NET Framework does.
+.NET Core does not support serializing all of the same types that .NET Framework does.
 Noteably, Delegates, `Type`, and `Assembly` are not supported.
