@@ -10,7 +10,7 @@ XML for applications that have a dependency on that legacy format.
 
 
 The library is a code-compatible replacement, but has a different assembly identity. That means you must recompile
-code against this library. Two types were moved into a different namespace to avoid potential conflicts:
+code against this library. Three types were moved into a different namespace to avoid potential conflicts:
 
 `Header` and `HeaderHandler`. Those are now in the `System.Runtime.Remoting.Messaging.Legacy` namespace and `ISoapMessage` is now in
 `System.Runtime.Serialization.Formatters.Legacy`.
