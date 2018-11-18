@@ -4,11 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>1699</NoWarn>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../msfinal.pub</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
     <DefineConstants>NET_4_0;NET_4_5;NET_4_6;MONO;WIN_PLATFORM;FEATURE_REMOTING</DefineConstants>
     <LangVersion>latest</LangVersion>
-    <PublicSign>true</PublicSign>
-
     <PackageId>SoapFormatter</PackageId>
     <AssemblyName>SoapFormatter</AssemblyName>
   </PropertyGroup>

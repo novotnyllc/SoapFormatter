@@ -6,8 +6,7 @@
     <IsPackable>false</IsPackable>
 
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../msfinal.pub</AssemblyOriginatorKeyFile>
-    <PublicSign>true</PublicSign>
+    <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
