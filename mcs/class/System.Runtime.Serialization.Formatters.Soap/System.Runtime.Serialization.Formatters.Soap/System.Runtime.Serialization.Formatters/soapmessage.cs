@@ -19,6 +19,7 @@ namespace System.Runtime.Serialization.Formatters {
     using System.Runtime.Serialization;
     using System;
     using System.Runtime.Remoting.Messaging.Legacy;
+    using System.Runtime.Serialization.Formatters.Legacy;
 
     // Class is used to return the call object for a SOAP call.
     // This is used when the top SOAP object is a fake object, it contains

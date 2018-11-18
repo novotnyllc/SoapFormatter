@@ -114,7 +114,7 @@ internal sealed class SoapFault : ISerializable
 [Serializable]
 [SoapType(Embedded=true)]
 [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class ServerFault
+    internal sealed class ServerFault
     {
         String exceptionType;
         String message;

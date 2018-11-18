@@ -39,6 +39,7 @@ using System.Runtime.Remoting;
 using System.Runtime.Serialization;
 using System.Runtime.Remoting.Messaging.Legacy;
 using System.Runtime.Remoting.Metadata;
+using System.Runtime.Serialization.Formatters.Legacy;
 
 namespace System.Runtime.Serialization.Formatters.Soap {
 	internal sealed class SoapReader {
