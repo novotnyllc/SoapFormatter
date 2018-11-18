@@ -18,7 +18,7 @@ Included items must then not match any entries in the exclude list to remain inc
             <!-- Match assembly file paths: -->
             <ModulePaths>
               <Include>
-                <ModulePath>.*System.Runtime.Serialization.Formatters.Soap.dll$</ModulePath>
+                <ModulePath>.*SoapFormatter.dll$</ModulePath>
               </Include>
               <Exclude>
                 <ModulePath>.*Test.dll$</ModulePath>
