@@ -18,10 +18,12 @@ namespace System.Runtime.Serialization.Formatters {
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
     using System;
+    using System.Runtime.Remoting.Messaging.Legacy;
+
     // Class is used to return the call object for a SOAP call.
     // This is used when the top SOAP object is a fake object, it contains
     // a method name as the element name instead of the object name.
-   [Serializable]
+    [Serializable]
 [System.Runtime.InteropServices.ComVisible(true)]
    internal class SoapMessage : ISoapMessage
     {

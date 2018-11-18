@@ -10,6 +10,7 @@
     <PublicSign>true</PublicSign>
 
     <PackageId>SoapFormatter</PackageId>
+    <AssemblyName>SoapFormatter</AssemblyName>
   </PropertyGroup>
   
   <ItemGroup>

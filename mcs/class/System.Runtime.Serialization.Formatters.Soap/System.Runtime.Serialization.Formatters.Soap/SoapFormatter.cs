@@ -37,7 +37,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Xml.Serialization;
 using System.Threading;
 using System.Globalization;
-
+using System.Runtime.Remoting.Messaging.Legacy;
 
 namespace System.Runtime.Serialization.Formatters.Soap {
 	enum RemMessageType {

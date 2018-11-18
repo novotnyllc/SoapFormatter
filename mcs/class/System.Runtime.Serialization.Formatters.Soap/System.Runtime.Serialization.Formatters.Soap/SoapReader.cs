@@ -37,7 +37,7 @@ using System.Threading;
 using System.Globalization;
 using System.Runtime.Remoting;
 using System.Runtime.Serialization;
-using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Messaging.Legacy;
 using System.Runtime.Remoting.Metadata;
 
 namespace System.Runtime.Serialization.Formatters.Soap {

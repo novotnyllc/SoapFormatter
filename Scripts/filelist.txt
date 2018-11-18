@@ -1,1 +1,1 @@
-**/System.Runtime.Serialization.Formatters.Soap.*
+**/SoapFormatter.*

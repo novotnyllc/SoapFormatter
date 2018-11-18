@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Globalization;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Messaging.Legacy;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Soap;

@@ -13,7 +13,7 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Messaging {
+namespace System.Runtime.Remoting.Messaging.Legacy {
     using System.Runtime.Remoting;
     //Define the required delegate
 [System.Runtime.InteropServices.ComVisible(true)]

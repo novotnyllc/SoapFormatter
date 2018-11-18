@@ -42,6 +42,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Globalization;
 using System.Text;
+using System.Runtime.Remoting.Messaging.Legacy;
 
 namespace System.Runtime.Serialization.Formatters.Soap {
 	
