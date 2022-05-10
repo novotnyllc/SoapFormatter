@@ -31,11 +31,14 @@ namespace SoapShared
 			var r = new System.IO.StreamReader(ms);
 			string s = r.ReadToEnd();
 			TestContext.WriteLine(s);
+			DateTime expectedTime = DateTime.Parse("2022-05-07T10:40:46.0618350-04:00");
+
+			//test needs to expect the date to be formatted in the datetime of the local system
 			string expected =
-@"<SOAP-ENV:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:SOAP-ENC=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:clr=""http://schemas.microsoft.com/clr/"" SOAP-ENV:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"">
+$@"<SOAP-ENV:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:SOAP-ENC=""http://schemas.xmlsoap.org/soap/encoding/"" xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/"" xmlns:clr=""http://schemas.microsoft.com/clr/"" SOAP-ENV:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"">
   <SOAP-ENV:Body>
     <a1:SerializableClass id=""ref-1"" xmlns:a1=""http://schemas.microsoft.com/clr/nsassem/SoapShared/Test%2C%20Version%3D1.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D64d05efcff27afd3"">
-      <m_time xsi:type=""xsd:dateTime"">2022-05-07T10:40:46.0618350-04:00</m_time>
+      <m_time xsi:type=""xsd:dateTime"">{expectedTime.ToLocalTime():yyyy-MM-ddTHH:mm:ss.fffffffzzz}</m_time>
     </a1:SerializableClass>
   </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>";
