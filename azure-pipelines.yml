@@ -11,9 +11,6 @@ pool:
 
 variables: 
   BuildConfiguration: Release
-
-env:
-  MSBUILDSINGLELOADCONTEXT: 1
   
 steps:
 - task: DotNetCoreCLI@2  
