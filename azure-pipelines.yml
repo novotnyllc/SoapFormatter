@@ -7,11 +7,11 @@ pr:
   - rel/*
 
 pool:
-  vmImage: vs2017-win2016
+  vmImage: windows-2022
 
 variables: 
   BuildConfiguration: Release
-
+  
 steps:
 - task: DotNetCoreCLI@2  
   inputs:

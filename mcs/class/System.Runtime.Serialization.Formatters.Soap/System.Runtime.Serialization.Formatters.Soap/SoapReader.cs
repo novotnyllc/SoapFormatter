@@ -687,8 +687,15 @@ namespace System.Runtime.Serialization.Formatters.Soap {
 				return objMgr.GetObject(componentHref);
 			}
 
-			if(componentType == null)
+			if (componentType == null)
+			{
 				return xmlReader.ReadElementString();
+			}
+			else if (mapper.IsInternalSoapType(componentType))
+			{
+				object obj = mapper.ReadInternalSoapValue(this, componentType);
+				return obj;
+			}
 
 			componentId = NextAvailableId;
 			objReturn = DeserializeObject(
