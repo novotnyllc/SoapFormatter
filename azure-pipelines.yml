@@ -1,64 +1,104 @@
 trigger:
-  - master
+  - main
   - rel/*
 
 pr:
-  - master
+  - main
   - rel/*
 
-pool:
-  vmImage: windows-2022
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: windows-latest
 
-variables: 
-  BuildConfiguration: Release
-  
-steps:
-- task: DotNetCoreCLI@2  
-  inputs:
-    command: custom
-    custom: tool
-    arguments: install --tool-path . nbgv
-  displayName: Install NBGV tool
+    variables: 
+      BuildConfiguration: Release
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
-- script: nbgv cloud
-  displayName: Set Version
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        version: 6.x
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: build
-    projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/*.sln'
-    arguments: -c $(BuildConfiguration)
-  displayName: Build
+    - task: DotNetCoreCLI@2  
+      inputs:
+        command: custom
+        custom: tool
+        arguments: install --tool-path . nbgv
+      displayName: Install NBGV tool
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: pack
-    packagesToPack: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/System.Runtime.Serialization.Formatters.Soap/*.csproj'
-    configuration: $(BuildConfiguration)
-    packDirectory: $(Build.ArtifactStagingDirectory)\Artifacts    
-    verbosityPack: Minimal
-  displayName: Pack
+    - script: nbgv cloud
+      displayName: Set Version
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: test
-    projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/Test/*.csproj'
-    arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/mcs/class/System.Runtime.Serialization.Formatters.Soap/CodeCoverage.runsettings /p:DebugType=portable
-  displayName: Run Tests
-    
-- task: PowerShell@2
-  displayName: Authenticode Sign artifacts
-  inputs:
-    filePath: Scripts/Sign-Package.ps1
-  env:
-    SignClientUser: $(SignClientUser)
-    SignClientSecret: $(SignClientSecret)
-    ArtifactDirectory: $(Build.ArtifactStagingDirectory)\Artifacts
-  condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
 
-- task: PublishBuildArtifacts@1
-  displayName: Publish Build Artifacts
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\Artifacts
-    artifactType: container
-    artifactName: Artifacts
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: build
+        projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/*.sln'
+        arguments: -c $(BuildConfiguration)
+      displayName: Build
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: pack
+        packagesToPack: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/System.Runtime.Serialization.Formatters.Soap/*.csproj'
+        configuration: $(BuildConfiguration)
+        packDirectory: $(Build.ArtifactStagingDirectory)\Packages    
+        verbosityPack: Minimal
+      displayName: Pack
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: test
+        projects: 'mcs/class/System.Runtime.Serialization.Formatters.Soap/Test/*.csproj'
+        arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/mcs/class/System.Runtime.Serialization.Formatters.Soap/CodeCoverage.runsettings /p:DebugType=portable
+      displayName: Run Tests
+
+    - publish: $(Build.ArtifactStagingDirectory)\Packages
+      displayName: Publish build packages
+      artifact: BuildPackages
+
+    - publish: Scripts
+      displayName: Publish signing config
+      artifact: config
+
+- stage: CodeSign
+  condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
+  jobs:
+  - deployment: CodeSign
+    displayName: Code Signing
+    pool:
+      vmImage: windows-latest    
+    environment: Code Sign - CI
+    variables:
+    - group: Sign Client Credentials
+    strategy:
+      runOnce:
+        deploy:
+          steps: 
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: custom
+              custom: tool
+              arguments: install --tool-path . SignClient
+            displayName: Install SignTool tool
+
+          - pwsh: |
+              .\SignClient "Sign" `
+              --baseDirectory "$(Pipeline.Workspace)\BuildPackages" `
+              --input "**/*.nupkg" `
+              --config "$(Pipeline.Workspace)\config\signclient.json" `
+              --filelist "$(Pipeline.Workspace)\config\filelist.txt" `
+              --user "$(SignClientUser)" `
+              --secret "$(SignClientSecret)" `
+              --name "SoapFormatter" `
+              --description "SoapFormatter" `
+              --descriptionUrl "https://github.com/novotnyllc/SoapFormatter"
+            displayName: Sign packages
+              
+          - publish: $(Pipeline.Workspace)/BuildPackages
+            displayName: Publish Signed Packages
+            artifact: SignedPackages
+
