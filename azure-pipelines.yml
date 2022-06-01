@@ -89,7 +89,7 @@ stages:
               .\SignClient "Sign" `
               --baseDirectory "$(Pipeline.Workspace)\BuildPackages" `
               --input "**/*.nupkg" `
-              --config "$(Pipeline.Workspace)\config\signclient.json" `
+              --config "$(Pipeline.Workspace)\config\appsettings.json" `
               --filelist "$(Pipeline.Workspace)\config\filelist.txt" `
               --user "$(SignClientUser)" `
               --secret "$(SignClientSecret)" `
